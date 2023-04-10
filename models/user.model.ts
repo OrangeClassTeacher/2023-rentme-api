@@ -8,12 +8,11 @@ interface IUser {
     type: String,
     required: [true, "Please provide an firts name"],
   },
-  username: {
-    type: String,
-    required: [true, "Please provide an username"],
-    unique: [true, "Username exists"],
+  Username : {
+    type : String,
+    required : [true , "Required"],
+    unique : [true , "Username is already exist"]
   },
-
   email: {
     type: String,
     required: [true, "Please provide an Email!"],
@@ -28,11 +27,18 @@ interface IUser {
     required: [true, "Number"],
     unique: [true, "Phone Number exists"],
   },
+  role : {
+    type : String,
+    enum : ["Admin" , "User" , "Staff"],
+    reuired : [true , "Required"]
+  },
+  address : {
+    type : String,
+    required : [true , "Required"]
+  }, 
+  profilePic : String,
   password: String,
   gender: Number,
-
-  order: [String],
-
   favItems: [String],
 }
 const userSchema = new Schema<IUser>
