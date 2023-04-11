@@ -12,11 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
+exports.login = exports.createUser = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
 // const User = require("../models/user.model");
 // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 const user_model_1 = __importDefault(require("../models/user.model"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield user_model_1.default.find({});
@@ -42,8 +44,9 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const newObj = req.body;
     try {
         if (newObj) {
-            console.log(newObj);
-            const result = yield user_model_1.default.create(newObj);
+            const hashedPass = yield bcrypt_1.default.hash(newObj.password, 10);
+            const newObj2 = Object.assign(Object.assign({}, newObj), { password: hashedPass });
+            const result = yield user_model_1.default.create(newObj2);
             res.json({ status: true, result });
         }
         else {
@@ -55,31 +58,34 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createUser = createUser;
-// const login = async (req : Request, res : Response) => {
-//   const { email, password } = req.body;
-//   if (!email || !password) {
-//     res
-//       .status(500)
-//       .send({ status: false, message: "Medeelelee buren oruulna uu" });
-//     return;
-//   }
-//   const user = await User.findOne({ email });
-//   if (user && (await bcrypt.compare(password, user.password))) {
-//     const token = jwt.sign({ user: user }, process.env.TOKEN_SECRET_KEY, {
-//       expiresIn: "2h",
-//     });
-//     res
-//       .status(200)
-//       .send({ status: true, data: user, message: "Success", token });
-//     return;
-//   } else {
-//     res.status(400).send({
-//       status: false,
-//       message: "user oldsongui ee, nuuts ug taarahgui bna",
-//     });
-//     return;
-//   }
-// };
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        res
+            .status(500)
+            .send({ status: false, message: "Medeelelee buren oruulna uu" });
+        return;
+    }
+    const user = yield user_model_1.default.findOne({ email });
+    if (user && (yield bcrypt_1.default.compare(password, user.password))) {
+        const token1 = process.env.TOKEN_SECRET_KEY || "";
+        const token = jsonwebtoken_1.default.sign({ user: user }, token1, {
+            expiresIn: "24h",
+        });
+        res
+            .status(200)
+            .send({ status: true, data: user, message: "Success", token });
+        return;
+    }
+    else {
+        res.status(400).send({
+            status: false,
+            message: "user oldsongui ee, nuuts ug taarahgui bna",
+        });
+        return;
+    }
+});
+exports.login = login;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {

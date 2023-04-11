@@ -1,32 +1,46 @@
 import mongoose , {Collection, Schema} from "mongoose"
 interface IItem{
+    itemName : string
+    itemPhoto : string
+    categoryId : string
+    phoneNumber : number
+    rating : Number,
+    itemComment : string,
+    rentalPrice : number
+    rentalDate : string
+    description : string
+}
+const itemSchema = new Schema<IItem>({
     itemName : {
         type : String,
-        required : [true , "Required"]
+        required : true
     },
     itemPhoto : {
         type : String,
-        required : [true , "Required"]
+        required : true
+    },
+    categoryId : {
+        type : String,
+        required : true
     },
     phoneNumber : {
         type : Number,
-        required : [true , "Required"]
+        required : true
     },
     rating : Number,
     itemComment : String,
     rentalPrice : {
         type : Number,
-        required : [true , " Required"]
+        required : true 
     },
     rentalDate : {
-        type : Date,
-        required : [true , "Required"]
-    }
+        type : String,
+        required : true
+    },
     description : {
         type :String,
-        required : [true , "Required"]
+        required : true
     },
-}
-const itemSchema = new Schema<IItem>
+})
 const Item = mongoose.model("Items" , itemSchema)
 export default Item

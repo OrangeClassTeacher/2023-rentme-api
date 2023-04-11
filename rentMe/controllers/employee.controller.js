@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
-const item_model_1 = __importDefault(require("../models/item.model"));
+exports.createEmployee = exports.updateEmployee = exports.deleteEmployee = exports.getOne = exports.getAll = void 0;
+const employees_1 = __importDefault(require("../models/employees"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield item_model_1.default.find({});
+        const result = yield employees_1.default.find({});
         res.json({ status: true, result });
     }
     catch (err) {
@@ -27,7 +27,7 @@ exports.getAll = getAll;
 const getOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield item_model_1.default.findById({ _id });
+        const result = yield employees_1.default.findById({ _id });
         res.json({ status: true, result });
     }
     catch (err) {
@@ -35,12 +35,12 @@ const getOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getOne = getOne;
-const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createEmployee = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newObj = req.body;
     try {
         console.log(req.body);
         if (newObj) {
-            const result = yield item_model_1.default.create(newObj);
+            const result = yield employees_1.default.create(newObj);
             res.json({ status: true, result });
         }
     }
@@ -48,26 +48,26 @@ const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.json({ status: false, message: err });
     }
 });
-exports.createItem = createItem;
-const updateItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createEmployee = createEmployee;
+const updateEmployee = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield item_model_1.default.findByIdAndUpdate({ _id }, req.body);
+        const result = yield employees_1.default.findByIdAndUpdate({ _id }, req.body);
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
 });
-exports.updateItem = updateItem;
-const deleteItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateEmployee = updateEmployee;
+const deleteEmployee = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield item_model_1.default.findByIdAndDelete({ _id });
+        const result = yield employees_1.default.findByIdAndDelete({ _id });
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
 });
-exports.deleteItem = deleteItem;
+exports.deleteEmployee = deleteEmployee;

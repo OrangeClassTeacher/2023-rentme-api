@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
-const item_model_1 = __importDefault(require("../models/item.model"));
+exports.createAdmin = exports.updateAdmin = exports.deleteAdmin = exports.getOne = exports.getAll = void 0;
+const admin_1 = __importDefault(require("../models/admin"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield item_model_1.default.find({});
+        const result = yield admin_1.default.find({});
         res.json({ status: true, result });
     }
     catch (err) {
@@ -27,7 +28,7 @@ exports.getAll = getAll;
 const getOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield item_model_1.default.findById({ _id });
+        const result = yield admin_1.default.findById({ _id });
         res.json({ status: true, result });
     }
     catch (err) {
@@ -35,12 +36,14 @@ const getOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getOne = getOne;
-const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newObj = req.body;
     try {
+        const hashedPass = yield bcrypt_1.default.hash(newObj.password, 10);
+        const newObj2 = Object.assign(Object.assign({}, newObj), { password: hashedPass });
         console.log(req.body);
         if (newObj) {
-            const result = yield item_model_1.default.create(newObj);
+            const result = yield admin_1.default.create(newObj2);
             res.json({ status: true, result });
         }
     }
@@ -48,26 +51,26 @@ const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.json({ status: false, message: err });
     }
 });
-exports.createItem = createItem;
-const updateItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createAdmin = createAdmin;
+const updateAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield item_model_1.default.findByIdAndUpdate({ _id }, req.body);
+        const result = yield admin_1.default.findByIdAndUpdate({ _id }, req.body);
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
 });
-exports.updateItem = updateItem;
-const deleteItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateAdmin = updateAdmin;
+const deleteAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield item_model_1.default.findByIdAndDelete({ _id });
+        const result = yield admin_1.default.findByIdAndDelete({ _id });
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
 });
-exports.deleteItem = deleteItem;
+exports.deleteAdmin = deleteAdmin;

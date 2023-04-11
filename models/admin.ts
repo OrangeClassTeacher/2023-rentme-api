@@ -1,16 +1,19 @@
 import mongoose, { Schema } from "mongoose"
 
 interface IAdmin{
-    username : {
+    email :string
+    password : string
+}
+const adminSchema = new Schema<IAdmin>({
+    email : {
         type : String,
-        required : [true , "REq"],
-        unique : [true , "ji"]
+        required : true,
+        unique :true
     },
     password : {
         type : String,
-        required : [true , "hi"]
+        required : true
     }
-}
-const adminSchema = new Schema<IAdmin>
+})
 const Admin = mongoose.model("Admin" , adminSchema)
 export default Admin
