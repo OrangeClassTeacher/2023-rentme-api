@@ -1,29 +1,36 @@
 import mongoose, { Schema } from "mongoose"
 
 interface IEmployee {
+    firstName : string
+    lastName : string
+    username :string
+    address : string
+    phoneNumber : number
+    profilePic : string,
+}
+const employeeSchema = new Schema<IEmployee>({
     firstName : {
         type : String,
-        required : [true , "Required"]
+        required : true 
     },
     lastName : {
         type : String,
-        required : [true , "REq"]
+        required : true
     },
     username : {
         type : String,
-        required : [true , "Req"]
+        required : true
     },
     address : {
         type : String,
-        required : [true , "req"]
+        required : true
     },
     phoneNumber : {
         type : Number,
-        required : [true , "Req"],
-        unique  : [true , "Phone number is exist"]
+        required : true,
+        unique  : true 
     },
     profilePic : String,
-}
-const employeeSchema = new Schema<IEmployee>
+})
 const Employee = mongoose.model("Employee" , employeeSchema)
 export default Employee

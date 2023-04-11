@@ -1,20 +1,21 @@
 ###
-GET http://localhost:8000/api/user
+POST http://localhost:8000/api/user
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgxMTkzNzcxLCJleHAiOjE2ODEyODAxNzF9.yOLRPOm9zg1MMpgi98IuvSXnvBBR7EhLtNnTZ2V6A3E
 
 ###
-GET http://localhost:8000/api/user/
+POSt http://localhost:8000/api/user/
 
 ###
 POST http://localhost:8000/api/user
 Content-Type: application/json
 
 {
-   "fisrtName" : "BatErdene",
+   "firstName" : "BatErdene",
    "lastName" : "Ganzorig",
-   "Username" : "Ganzoo",
-   "email" : "baterdeneganzorig959@gmail.com",
+   "Username" : "Ganzo",
+   "email" : "baterdeneganzorig99@gmail.com",
    "birthDate" : "2004-07-21",
-   "phoneNumber" : 89018416,
+   "phoneNumber" : 89018417,
    "role" : "Admin",
    "address" : "UB",
    "password" : "123",
@@ -24,3 +25,110 @@ Content-Type: application/json
 } 
 ###
 DELETE http://localhost:8000/api/user/6434ed7e8b232f101bfbb4fa
+
+###
+GET http://localhost:8000/api/category
+
+###
+POST http://localhost:8000/api/category
+Content-Type: application/json
+
+{
+    "categoryName" : "Mantuun Buuz"
+}
+
+###
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+    "email" : "baterdeneganzorig99@gmail.com",
+    "password" : "123"
+}
+
+
+###
+GET http://localhost:8000/api/item
+
+###
+GET http://localhost:8000/api/item/
+
+###
+POST http://localhost:8000/api/item
+Content-Type: application/json
+
+{
+  "itemName" : "Short",
+  "itemPhoto" : "hi",
+  "categoryId" : "6434f24ea29bc8df661b4240",
+  "phoneNumber" : 89018416,
+  "rating" : 5,
+  "rentalPrice" : 10000,
+  "rentalDate" : "24hours",
+  "description" : "hello"
+
+}
+
+###
+PUT http://localhost:8000/api/item/
+
+###
+DELETE http://localhost:8000/api/item/
+
+###
+GET http://localhost:8000/api/admin
+
+###
+GET http://localhost:8000/api/admin/
+
+###
+POST http://localhost:8000/api/admin
+Content-Type: application/json
+
+{
+    "email" : "baterdeneganzorig959@gmail.com",
+    "password" : "123"
+
+}
+
+###
+PUT http://localhost:8000/api/admin/
+Content-Type: application/json
+
+{
+
+}
+
+###
+DELETE http://localhost:8000/api/admin/
+
+
+### 
+GET http://localhost:8000/api/employee
+
+###
+GET http://localhost:8000/api/employee/
+
+###
+POST http://localhost:8000/api/employee
+Content-Type: application/json
+
+{
+   "firstName" : "Ganzorig",
+   "lastName" : "Baterdene",
+   "username" : "Ganzoo",
+   "address" : "hi",
+   "phoneNumber" : 89018416,
+   "profilePic" : "hi"
+}
+
+###
+PUT http://localhost:8000/api/employee
+Content-Type: application/json
+
+{
+
+}
+
+###
+DELETE http://localhost:8000/api/employee/

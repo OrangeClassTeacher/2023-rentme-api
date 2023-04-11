@@ -8,6 +8,9 @@ import mongoose from "mongoose"
 import cors from "cors"
 import userRoute from "./routes/user.route"
 import categoryRoute from "./routes/category.route";
+import itemRoute from "./routes/item.route"
+import adminRoute from "./routes/admin.route"
+import employeeRoute from "./routes/employee.route"
 
 
 const app = express();
@@ -27,7 +30,9 @@ mongoose
 
 app.use("/api" , userRoute)
 app.use("/api" , categoryRoute)
-
+app.use("/api" , itemRoute)
+app.use("/api" , adminRoute)
+app.use("/api" , employeeRoute)
 app.listen(port, () => {
   console.log(`Server is running on ${port}.`);
 });
