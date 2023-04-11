@@ -54,3 +54,6 @@ const deleteCategory = async (req : Request, res : Response) => {
   }
 };
 export {getAll , getOne , deleteCategory, updateCategory , createCategory}
+
+
+// HI
