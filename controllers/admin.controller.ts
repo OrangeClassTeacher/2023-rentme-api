@@ -56,4 +56,5 @@ const deleteAdmin = async (req : Request, res : Response) => {
     res.json({ status: false, message: err });
   }
 };
+
 export {getAll , getOne , deleteAdmin, updateAdmin , createAdmin}

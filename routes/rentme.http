@@ -100,7 +100,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8000/api/admin/
+DELETE http://localhost:8000/api/admin/643523c2f0fc3a71bfe463a5
 
 
 ### 
