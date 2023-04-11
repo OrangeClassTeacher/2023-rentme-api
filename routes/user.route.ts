@@ -8,6 +8,6 @@ route.get("/user",  getAll)
 .get("/user/:_id",  getOne)
 .post("/user" , createUser).
 put("/user/:_id" , updateUser)
-.delete("/user" , deleteUser)
+.delete("/user/:_id" , deleteUser)
 
 export default route

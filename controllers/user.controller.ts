@@ -27,17 +27,20 @@ const getOne = async (req : Request, res : Response) => {
 };
 
 const createUser = async (req : Request, res : Response) => {
-  const newObj = req.body;
+  const newObj = req.body
   try {
-    console.log(req.body);
-    if (newObj) {
-      // const hashedPass = await bcrypt.hash(newObj.password, 10);
-      // const newObj2 = { ...newObj, password: hashedPass };
+    if(newObj){
+      console.log(newObj);
+      
       const result = await User.create(newObj);
       res.json({ status: true, result });
+    }else{
+      console.log("err");
+      
     }
+      
   } catch (err) {
-    res.json({ status: false, message: err });
+    res.json({ status: false,  err });
   }
 };
 // const login = async (req : Request, res : Response) => {

@@ -1,0 +1,26 @@
+###
+GET http://localhost:8000/api/user
+
+###
+GET http://localhost:8000/api/user/
+
+###
+POST http://localhost:8000/api/user
+Content-Type: application/json
+
+{
+   "fisrtName" : "BatErdene",
+   "lastName" : "Ganzorig",
+   "Username" : "Ganzoo",
+   "email" : "baterdeneganzorig959@gmail.com",
+   "birthDate" : "2004-07-21",
+   "phoneNumber" : 89018416,
+   "role" : "Admin",
+   "address" : "UB",
+   "password" : "123",
+   "gender" : "Male",
+   "favItems" : ["hi"]
+
+} 
+###
+DELETE http://localhost:8000/api/user/6434ed7e8b232f101bfbb4fa

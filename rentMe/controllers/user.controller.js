@@ -41,16 +41,17 @@ exports.getOne = getOne;
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newObj = req.body;
     try {
-        console.log(req.body);
         if (newObj) {
-            // const hashedPass = await bcrypt.hash(newObj.password, 10);
-            // const newObj2 = { ...newObj, password: hashedPass };
+            console.log(newObj);
             const result = yield user_model_1.default.create(newObj);
             res.json({ status: true, result });
         }
+        else {
+            console.log("err");
+        }
     }
     catch (err) {
-        res.json({ status: false, message: err });
+        res.json({ status: false, err });
     }
 });
 exports.createUser = createUser;
