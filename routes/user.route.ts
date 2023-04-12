@@ -1,11 +1,11 @@
 import {Router} from "express"
 import {getOne , getAll , createUser , deleteUser , updateUser , login} from "../controllers/user.controller"
-// import {auth} from "../middleware/auth"
+import {auth} from "../middleware/auth"
 
 
 const route = Router();
 
-route.post("/user" , getAll)
+route.get("/user" ,auth , getAll)
 .post("/user/:_id",  getOne)
 .post("/user" , createUser).
 put("/user/:_id" , updateUser)
