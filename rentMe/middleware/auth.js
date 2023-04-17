@@ -5,8 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const config = process.env;
-const key1 = process.env.TOKEN_SECRET_KEY;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const key1 = process.env.TOKEN_SECRET_KEY || "";
 const auth = (req, res, next) => {
     const token = req.body.token || req.query.token || req.headers["x-access-token"];
     console.log("Hi middleware");
