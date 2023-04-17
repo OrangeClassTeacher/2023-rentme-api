@@ -1,10 +1,11 @@
-import jwt from "jsonwebtoken"
-import { Request  , Response , NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
+import dotenv from "dotenv";
 
-const config = process.env;
-const key1 : string = process.env.TOKEN_SECRET_KEY ;
+dotenv.config();
+const key1: string = process.env.TOKEN_SECRET_KEY || "";
 
-const auth = (req : Request, res : Response, next : NextFunction) => {
+const auth = (req: Request, res: Response, next: NextFunction) => {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
 
@@ -16,15 +17,15 @@ const auth = (req : Request, res : Response, next : NextFunction) => {
       message: "Хэрэглэгчийн token оруулах шаардлагатай.",
     });
   }
-  console.log({key1});
-  
+  console.log({ key1 });
+
   try {
-    const decoded = jwt.verify(token, key1 );
+    const decoded = jwt.verify(token, key1);
     console.log(decoded);
     req.user = decoded;
   } catch (err) {
     console.log(err);
-    
+
     return res.status(401).json({
       success: false,
       message: "Хэрэглэгчийн token буруу, эсвэл идэвхигүй байна.",
@@ -33,4 +34,4 @@ const auth = (req : Request, res : Response, next : NextFunction) => {
   return next();
 };
 
-export {auth}
+export { auth };
