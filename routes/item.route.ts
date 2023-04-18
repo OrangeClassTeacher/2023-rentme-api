@@ -5,7 +5,7 @@ import {getOne , getAll , createItem , deleteItem , updateItem} from "../control
 
 const route = Router();
 
-route.get("/item" , getAll)
+route.post("/items" , getAll)
 .get("/item/:_id",  getOne)
 .post("/item" , createItem).
 put("/item/:_id" , updateItem)

@@ -41,6 +41,8 @@ const itemSchema = new Schema<IItem>({
         type :String,
         required : true
     },
+}, {
+    timestamps : true
 })
 const Item = mongoose.model("Items" , itemSchema)
 export default Item

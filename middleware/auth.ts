@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken"
 import { Request  , Response , NextFunction } from "express";
+import dotenv from "dotenv"
 
-const config = process.env;
-const key1 : string = process.env.TOKEN_SECRET_KEY ;
+dotenv.config()
+const key1 : string = process.env.TOKEN_SECRET_KEY || "" ;
 
 const auth = (req : Request, res : Response, next : NextFunction) => {
   const token =

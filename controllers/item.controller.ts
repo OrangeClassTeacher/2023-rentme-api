@@ -4,10 +4,29 @@ import  {Request , Response} from "express"
 
 
 const getAll = async (req : Request, res : Response) => {
+  const {pageSize, searchText , sort } = req.body
   try {
-    const result = await Item.find({});
+const filter1 = {
+    $or: 
+      searchText && [
+        { itemName: { $regex: searchText } },
+        { description: { $regex: searchText } },
+      ],
+  };
+// console.log(filter);
 
-    res.json({ status: true, result });
+  const skips : number = 10 * (pageSize - 1) 
+  const result = await Item.find(filter1)
+  .limit(28)
+  .skip(skips)
+  // .select({itemPhoto : 1 , itemName : 1 , phoneNumber : 1 , rentalPrice : 1 , rentalDate : 1, discription : 1});
+ console.log(result);
+ 
+  if(result){
+  res.json({ status: true, result });
+ }else{
+  res.json({status : false , message : "Not Found"})
+}  
   } catch (err) {
     res.json({ status: false, message: err });
   }
