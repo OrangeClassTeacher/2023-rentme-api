@@ -10,7 +10,7 @@ import {
 const route = Router();
 
 route
-  .get("/item", getAll)
+  .post("/items", getAll)
   .get("/item/:_id", getOne)
   .post("/item", createItem)
   .put("/item/:_id", updateItem)

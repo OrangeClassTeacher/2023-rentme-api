@@ -27,24 +27,24 @@ const mongoose_1 = __importStar(require("mongoose"));
 const employeeSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
-        required: true
+        required: true,
     },
     lastName: {
         type: String,
-        required: true
+        required: true,
     },
     username: {
         type: String,
-        required: true
+        required: true,
     },
     address: {
         type: String,
-        required: true
+        required: true,
     },
     phoneNumber: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
     },
     profilePic: String,
 });

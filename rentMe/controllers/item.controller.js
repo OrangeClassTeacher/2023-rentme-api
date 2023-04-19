@@ -14,9 +14,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
+//hi
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { pageSize, searchText } = req.body;
+    // const count = pageSize * 30 +1
+    const filter1 = {
+        $or: searchText && [
+            { itemName: { $regex: searchText } },
+            { description: { $regex: searchText } },
+        ],
+    };
     try {
-        const result = yield item_model_1.default.find({});
+        const rowCount = yield item_model_1.default.find(filter1).count();
+        console.log(rowCount);
+        const skips = 10 * (pageSize - 1);
+        const result = yield item_model_1.default.find(filter1).skip(skips).limit(10);
         res.json({ status: true, result });
     }
     catch (err) {

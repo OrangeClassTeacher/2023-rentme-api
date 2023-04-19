@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
+//hui
 dotenv_1.default.config();
 const key1 = process.env.TOKEN_SECRET_KEY || "";
 const auth = (req, res, next) => {
