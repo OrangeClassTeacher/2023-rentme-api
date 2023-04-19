@@ -15,8 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCategory = exports.updateCategory = exports.deleteCategory = exports.getOne = exports.getAll = void 0;
 const category_1 = __importDefault(require("../models/category"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { searchText } = req.body;
+    const filter1 = {
+        $or: searchText && [{ categoryName: { $regex: searchText } }],
+    };
     try {
-        const result = yield category_1.default.find({});
+        const result = yield category_1.default.find(filter1);
         res.json({ status: true, result });
     }
     catch (err) {

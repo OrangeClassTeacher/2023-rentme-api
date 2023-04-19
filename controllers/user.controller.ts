@@ -4,9 +4,23 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const getAll = async (req: Request, res: Response) => {
-  try {
-    const result = await User.find({});
+  const { pageSize, searchText } = req.body;
+  // const count = pageSize * 30 +1
+  console.log(pageSize, searchText);
 
+  const filter1 = {
+    $or: searchText && [
+      { fisrtName: { $regex: searchText } },
+      { lastName: { $regex: searchText } },
+      { Username: { $regex: searchText } },
+      { email: { $regex: searchText } },
+    ],
+  };
+  try {
+    const rowCount = await User.find(filter1).count();
+    console.log(rowCount);
+    const skips = 10 * (pageSize - 1);
+    const result = await User.find(filter1).skip(skips).limit(10);
     res.json({ status: true, result });
   } catch (err) {
     res.json({ status: false, message: err });

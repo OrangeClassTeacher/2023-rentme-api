@@ -17,8 +17,22 @@ const user_model_1 = __importDefault(require("../models/user.model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { pageSize, searchText } = req.body;
+    // const count = pageSize * 30 +1
+    console.log(pageSize, searchText);
+    const filter1 = {
+        $or: searchText && [
+            { fisrtName: { $regex: searchText } },
+            { lastName: { $regex: searchText } },
+            { Username: { $regex: searchText } },
+            { email: { $regex: searchText } },
+        ],
+    };
     try {
-        const result = yield user_model_1.default.find({});
+        const rowCount = yield user_model_1.default.find(filter1).count();
+        console.log(rowCount);
+        const skips = 10 * (pageSize - 1);
+        const result = yield user_model_1.default.find(filter1).skip(skips).limit(10);
         res.json({ status: true, result });
     }
     catch (err) {
