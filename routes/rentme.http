@@ -57,6 +57,9 @@ Content-Type: application/json
 
 
 ###
+GET http://localhost:8000/api/item
+
+###
 POST http://localhost:8000/api/items
 Content-Type: application/json
 
