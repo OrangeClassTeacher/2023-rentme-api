@@ -2,8 +2,8 @@ import Item from "../models/item.model";
 import { Request, Response } from "express";
 
 //hi
-const getAll = async (req: Request, res: Response) => {
-  const { pageSize, searchText } = req.body;
+const getAllWithSearch = async (req: Request, res: Response) => {
+  const { pageSize, searchText, priceSort } = req.body;
   // const count = pageSize * 30 +1
   const filter1 = {
     $or: searchText && [
@@ -22,7 +22,14 @@ const getAll = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-
+const getAll = async (req: Request, res: Response) => {
+  try {
+    const result = await Item.find({});
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
 const getOne = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
@@ -63,4 +70,4 @@ const deleteItem = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-export { getAll, getOne, deleteItem, updateItem, createItem };
+export { getAll, getOne, deleteItem, updateItem, createItem, getAllWithSearch };

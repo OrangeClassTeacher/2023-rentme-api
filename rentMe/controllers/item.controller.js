@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
+exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
 //hi
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { pageSize, searchText } = req.body;
+const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { pageSize, searchText, priceSort } = req.body;
     // const count = pageSize * 30 +1
     const filter1 = {
         $or: searchText && [
@@ -29,6 +29,16 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(rowCount);
         const skips = 10 * (pageSize - 1);
         const result = yield item_model_1.default.find(filter1).skip(skips).limit(10);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getAllWithSearch = getAllWithSearch;
+const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield item_model_1.default.find({});
         res.json({ status: true, result });
     }
     catch (err) {
