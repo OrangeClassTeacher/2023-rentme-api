@@ -2,6 +2,7 @@ import mongoose, { Collection, Schema } from "mongoose";
 interface IItem {
   itemName: string;
   itemPhoto: string;
+  itemSlidePhoto: [string];
   categoryId: string;
   phoneNumber: number;
   rating: Number;
@@ -19,6 +20,9 @@ const itemSchema = new Schema<IItem>({
   itemPhoto: {
     type: String,
     required: true,
+  },
+  itemSlidePhoto: {
+    type: [String],
   },
   categoryId: {
     type: String,

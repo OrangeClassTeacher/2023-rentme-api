@@ -27,33 +27,40 @@ const mongoose_1 = __importStar(require("mongoose"));
 const itemSchema = new mongoose_1.Schema({
     itemName: {
         type: String,
-        required: true
+        required: true,
     },
     itemPhoto: {
         type: String,
-        required: true
+        required: true,
+    },
+    itemSlidePhoto: {
+        type: [String],
     },
     categoryId: {
         type: String,
-        required: true
+        required: true,
     },
     phoneNumber: {
         type: Number,
-        required: true
+        required: true,
     },
     rating: Number,
     itemComment: String,
     rentalPrice: {
         type: Number,
-        required: true
+        required: true,
     },
-    rentalDate: {
-        type: String,
-        required: true
+    rentalStartDate: {
+        type: Date,
+        required: true,
+    },
+    rentalEndDate: {
+        type: Date,
+        required: true,
     },
     description: {
         type: String,
-        required: true
+        required: true,
     },
 });
 const Item = mongoose_1.default.model("Items", itemSchema);
