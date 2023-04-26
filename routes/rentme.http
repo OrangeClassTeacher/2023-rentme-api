@@ -76,9 +76,8 @@ POST http://localhost:8000/api/item
 Content-Type: application/json
 
 {
-  "itemName" : "bag",
-  "itemPhoto" : "https://res.cloudinary.com/devfpr9pm/image/upload/v1682388642/RentMeProduct/xwgrntdx6krapm0tqatr.png",
-  "itemSlidePhoto" : ["https://res.cloudinary.com/devfpr9pm/image/upload/v1682388642/RentMeProduct/xwgrntdx6krapm0tqatr.png" , "https://res.cloudinary.com/devfpr9pm/image/upload/v1682388642/RentMeProduct/xwgrntdx6krapm0tqatr.png"],
+  "itemName" : "Gun",
+  "itemPhoto" : "hi",
   "categoryId" : "6434f24ea29bc8df661b4240",
   "phoneNumber" : 89018416,
   "rating" : 5,

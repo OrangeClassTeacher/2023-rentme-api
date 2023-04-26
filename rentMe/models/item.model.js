@@ -32,9 +32,12 @@ const itemSchema = new mongoose_1.Schema({
     itemPhoto: {
         type: String,
         required: true,
+<<<<<<< HEAD
     },
     itemSlidePhoto: {
         type: [String],
+=======
+>>>>>>> 657beb1 (commit)
     },
     categoryId: {
         type: String,
