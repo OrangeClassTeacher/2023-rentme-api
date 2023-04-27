@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const getAll = async (req: Request, res: Response) => {
+const getAllWithSearch = async (req: Request, res: Response) => {
   const { pageSize, searchText } = req.body;
   // const count = pageSize * 30 +1
   console.log(pageSize, searchText);
@@ -26,7 +26,14 @@ const getAll = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-
+const getAll = async (req: Request, res: Response) => {
+  try {
+    const result = await User.find({});
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
 const getOne = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
@@ -100,4 +107,12 @@ const deleteUser = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-export { getAll, getOne, deleteUser, updateUser, createUser, login };
+export {
+  getAll,
+  getOne,
+  deleteUser,
+  updateUser,
+  getAllWithSearch,
+  createUser,
+  login,
+};

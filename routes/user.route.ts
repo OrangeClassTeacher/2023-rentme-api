@@ -6,13 +6,15 @@ import {
   deleteUser,
   updateUser,
   login,
+  getAllWithSearch,
 } from "../controllers/user.controller";
 import { auth } from "../middleware/auth";
 
 const route = Router();
 
 route
-  .post("/users", getAll)
+  .post("/users", getAllWithSearch)
+  .get("/user", getAll)
   .post("/user/:_id", getOne)
   .post("/user", createUser)
   .put("/user/:_id", updateUser)

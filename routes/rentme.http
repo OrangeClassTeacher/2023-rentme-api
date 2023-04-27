@@ -1,10 +1,13 @@
+
+GET http://localhost:8000/api/user
 ###
 POST http://localhost:8000/api/users
 Content-Type: application/json
 
 {
     "pageSize" : 1,
-    "searchText" : "Ganzoo"
+    "searchText" : "Ganzeo"
+    
 }
 ###
 POSt http://localhost:8000/api/user/
@@ -16,10 +19,10 @@ Content-Type: application/json
 {
    "firstName" : "BatErdene",
    "lastName" : "Ganzorig",
-   "Username" : "Ganzo",
-   "email" : "baterdeneganzorig99@gmail.com",
+   "Username" : "Ganzeo",
+   "email" : "baterdenegeanzorig99@gmail.com",
    "birthDate" : "2004-07-21",
-   "phoneNumber" : 89018417,
+   "phoneNumber" : 89118417,
    "role" : "Admin",
    "address" : "UB",
    "password" : "123",

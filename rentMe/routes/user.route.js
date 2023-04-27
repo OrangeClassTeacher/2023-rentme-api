@@ -4,7 +4,8 @@ const express_1 = require("express");
 const user_controller_1 = require("../controllers/user.controller");
 const route = (0, express_1.Router)();
 route
-    .post("/users", user_controller_1.getAll)
+    .post("/users", user_controller_1.getAllWithSearch)
+    .get("/user", user_controller_1.getAll)
     .post("/user/:_id", user_controller_1.getOne)
     .post("/user", user_controller_1.createUser)
     .put("/user/:_id", user_controller_1.updateUser)

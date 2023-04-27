@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.createUser = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
+exports.login = exports.createUser = exports.getAllWithSearch = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { pageSize, searchText } = req.body;
     // const count = pageSize * 30 +1
     console.log(pageSize, searchText);
@@ -33,6 +33,16 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(rowCount);
         const skips = 10 * (pageSize - 1);
         const result = yield user_model_1.default.find(filter1).skip(skips).limit(10);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getAllWithSearch = getAllWithSearch;
+const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_model_1.default.find({});
         res.json({ status: true, result });
     }
     catch (err) {
