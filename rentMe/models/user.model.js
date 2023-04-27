@@ -27,49 +27,49 @@ const mongoose_1 = __importStar(require("mongoose"));
 const userSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
-        required: true
+        required: true,
     },
     lastName: {
         type: String,
-        required: true
+        required: true,
     },
     Username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     birthDate: {
         type: Date,
-        required: true
+        required: true,
     },
     phoneNumber: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
     },
     role: {
         type: String,
         enum: ["Admin", "User", "Staff"],
-        reuired: true
+        reuired: true,
     },
     address: {
         type: String,
-        required: true
+        required: true,
     },
     profilePic: String,
     password: {
         type: String,
-        required: true
+        required: true,
     },
     gender: {
         type: String,
         enum: ["Male", "Female"],
-        required: true
+        required: true,
     },
     favItems: [String],
 });

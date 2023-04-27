@@ -12,7 +12,7 @@ import { auth } from "../middleware/auth";
 const route = Router();
 
 route
-  .post("/users", getAll)
+  .get("/users", auth, getAll)
   .post("/user/:_id", getOne)
   .post("/user", createUser)
   .put("/user/:_id", updateUser)
