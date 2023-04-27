@@ -1,3 +1,6 @@
+GET http://localhost:8000/api/users
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgyNDgzNDc1LCJleHAiOjE2ODI1Njk4NzV9.UxIa6hRwR3P4p92d9HY-2suvaCbHi-4sp3zUvNqMW4w
+
 ###
 POST http://localhost:8000/api/users
 Content-Type: application/json
@@ -56,7 +59,19 @@ Content-Type: application/json
 }
 
 ###
+<<<<<<< HEAD
 GET http://localhost:8000/api/item
+=======
+POST http://localhost:8000/api/auth/signup
+Content-Type: application/json
+
+{
+
+}
+###
+GET http://localhost:8000/api/item
+
+>>>>>>> 2a6fa2e30fa9a3e2f9e16771c0f11bb1373b695a
 ###
 POST http://localhost:8000/api/items
 Content-Type: application/json
@@ -74,13 +89,14 @@ POST http://localhost:8000/api/item
 Content-Type: application/json
 
 {
-  "itemName" : "bag",
+  "itemName" : "Gun",
   "itemPhoto" : "hi",
   "categoryId" : "6434f24ea29bc8df661b4240",
   "phoneNumber" : 89018416,
   "rating" : 5,
   "rentalPrice" : 10000,
-  "rentalDate" : "24hours",
+  "rentalStartDate" : "2023-04-25",
+  "rentalEndDate" : "2023-05-01",
   "description" : "hello"
 
 }

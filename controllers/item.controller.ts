@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 //hi
 const getAllWithSearch = async (req: Request, res: Response) => {
-  const { pageSize, searchText, priceSort } = req.body;
+  const { pageSize, searchText } = req.body;
   // const count = pageSize * 30 +1
   const filter1 = {
     $or: searchText && [

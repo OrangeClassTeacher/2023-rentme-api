@@ -16,7 +16,11 @@ exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.del
 const item_model_1 = __importDefault(require("../models/item.model"));
 //hi
 const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+<<<<<<< HEAD
     const { pageSize, searchText, priceSort } = req.body;
+=======
+    const { pageSize, searchText } = req.body;
+>>>>>>> 2a6fa2e30fa9a3e2f9e16771c0f11bb1373b695a
     // const count = pageSize * 30 +1
     const filter1 = {
         $or: searchText && [
