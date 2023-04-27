@@ -8,7 +8,7 @@ import {
   login,
   getAllWithSearch,
 } from "../controllers/user.controller";
-import { auth } from "../middleware/auth";
+// import { auth } from "../middleware/auth";
 
 const route = Router();
 
