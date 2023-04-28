@@ -59,19 +59,7 @@ Content-Type: application/json
 }
 
 ###
-<<<<<<< HEAD
 GET http://localhost:8000/api/item
-=======
-POST http://localhost:8000/api/auth/signup
-Content-Type: application/json
-
-{
-
-}
-###
-GET http://localhost:8000/api/item
-
->>>>>>> 2a6fa2e30fa9a3e2f9e16771c0f11bb1373b695a
 ###
 POST http://localhost:8000/api/items
 Content-Type: application/json

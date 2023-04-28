@@ -79,7 +79,7 @@ const login = async (req: Request, res: Response) => {
     });
     res
       .status(200)
-      .send({ status: true, data: user, message: "Success", token });
+      .send({ status: true, result: user, message: "Success", token });
     return;
   } else {
     res.status(400).send({
