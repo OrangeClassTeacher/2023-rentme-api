@@ -1,6 +1,13 @@
 import Item from "../models/item.model";
 import { Request, Response } from "express";
 
+
+const ratingCount = [
+  { rating: 4.5, count: 0 },
+  { rating: 4, count: 0 },
+  { rating: 3.5, count: 0 },
+  { rating: 3, count: 0 },
+];
 //hi
 const getAllWithSearch = async (req: Request, res: Response) => {
   const { pageSize, searchText } = req.body;
@@ -23,6 +30,9 @@ const getAllWithSearch = async (req: Request, res: Response) => {
   }
 };
 const getAll = async (req: Request, res: Response) => {
+
+  console.log("Test");
+  
   try {
     const result = await Item.find({});
     res.json({ status: true, result });
