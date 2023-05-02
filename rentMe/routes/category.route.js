@@ -4,7 +4,8 @@ const express_1 = require("express");
 const category_controller_1 = require("../controllers/category.controller");
 const route = (0, express_1.Router)();
 route
-    .post("/categories", category_controller_1.getAll)
+    .post("/categories", category_controller_1.getAllWithSearch)
+    .get("/category", category_controller_1.getAll)
     .get("/category/:_id", category_controller_1.getOne)
     .post("/category", category_controller_1.createCategory)
     .put("/category/:_id", category_controller_1.updateCategory)
