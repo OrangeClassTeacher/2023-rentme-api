@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 const port: string = process.env.PORT || "";
-const MONGO_DB_URL: string = process.env.MONGO_DB_URL || "";
+const MONGO_DB_URL: string = process.env.MONGO_DB_URI || "";
 // console.log(MONGO_DB_URL);
 
 mongoose
