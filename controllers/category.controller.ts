@@ -1,7 +1,7 @@
 import Category from "../models/category";
 import { Request, Response } from "express";
 
-const getAll = async (req: Request, res: Response) => {
+const getAllWithSearch = async (req: Request, res: Response) => {
   const { searchText } = req.body;
   const filter1 = {
     $or: searchText && [{ categoryName: { $regex: searchText } }],
@@ -12,6 +12,14 @@ const getAll = async (req: Request, res: Response) => {
     res.json({ status: true, result });
   } catch (err) {
     res.json({ status: false, message: err });
+  }
+};
+const getAll = async (req: Request, res: Response) => {
+  try {
+    const result = await Category.find({});
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ result: false, message: err });
   }
 };
 
@@ -55,6 +63,13 @@ const deleteCategory = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-export { getAll, getOne, deleteCategory, updateCategory, createCategory };
+export {
+  getAll,
+  getOne,
+  deleteCategory,
+  updateCategory,
+  createCategory,
+  getAllWithSearch,
+};
 
 // HI
