@@ -14,6 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
+const ratingCount = [
+    { rating: 4.5, count: 0 },
+    { rating: 4, count: 0 },
+    { rating: 3.5, count: 0 },
+    { rating: 3, count: 0 },
+];
 //hi
 const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { pageSize, searchText } = req.body;
@@ -37,6 +43,7 @@ const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.getAllWithSearch = getAllWithSearch;
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Test");
     try {
         const result = yield item_model_1.default.find({});
         res.json({ status: true, result });
