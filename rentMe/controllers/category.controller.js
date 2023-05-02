@@ -12,15 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createCategory = exports.updateCategory = exports.deleteCategory = exports.getOne = exports.getAll = void 0;
+exports.getAllWithSearch = exports.createCategory = exports.updateCategory = exports.deleteCategory = exports.getOne = exports.getAll = void 0;
 const category_1 = __importDefault(require("../models/category"));
+const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { searchText } = req.body;
+    const filter1 = {
+        $or: searchText && [{ categoryName: { $regex: searchText } }],
+    };
+    try {
+        const result = yield category_1.default.find(filter1);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getAllWithSearch = getAllWithSearch;
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield category_1.default.find({});
         res.json({ status: true, result });
     }
     catch (err) {
-        res.json({ status: false, message: err });
+        res.json({ result: false, message: err });
     }
 });
 exports.getAll = getAll;

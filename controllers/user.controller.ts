@@ -3,10 +3,32 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const getAllWithSearch = async (req: Request, res: Response) => {
+  const { pageSize, searchText } = req.body;
+  // const count = pageSize * 30 +1
+  console.log(pageSize, searchText);
+
+  const filter1 = {
+    $or: searchText && [
+      { fisrtName: { $regex: searchText } },
+      { lastName: { $regex: searchText } },
+      { Username: { $regex: searchText } },
+      { email: { $regex: searchText } },
+    ],
+  };
+  try {
+    const rowCount = await User.find(filter1).count();
+    console.log(rowCount);
+    const skips = 10 * (pageSize - 1);
+    const result = await User.find(filter1).skip(skips).limit(10);
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
 const getAll = async (req: Request, res: Response) => {
   try {
     const result = await User.find({});
-
     res.json({ status: true, result });
   } catch (err) {
     res.json({ status: false, message: err });
@@ -57,7 +79,7 @@ const login = async (req: Request, res: Response) => {
     });
     res
       .status(200)
-      .send({ status: true, data: user, message: "Success", token });
+      .send({ status: true, result: user, message: "Success", token });
     return;
   } else {
     res.status(400).send({
@@ -86,4 +108,12 @@ const deleteUser = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-export { getAll, getOne, deleteUser, updateUser, createUser, login };
+export {
+  getAll,
+  getOne,
+  deleteUser,
+  updateUser,
+  createUser,
+  login,
+  getAllWithSearch,
+};

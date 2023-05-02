@@ -7,6 +7,8 @@ import categoryRoute from "./routes/category.route";
 import itemRoute from "./routes/item.route";
 import adminRoute from "./routes/admin.route";
 import employeeRoute from "./routes/employee.route";
+// import firebase from "firebase";
+// import firebaseConfig from "./config/firebaseConfig";
 
 const app = express();
 

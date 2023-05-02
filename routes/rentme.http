@@ -1,9 +1,17 @@
 ###
-GET http://localhost:8000/api/user
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgxNzAyMjA2LCJleHAiOjE2ODE3ODg2MDZ9.GR9_Ziv8m0eXxAv-IfoRz9kX66aPP9-NkC39DzL4zpQ
+GET http://localhost:8000/api/users
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgyNDgzNDc1LCJleHAiOjE2ODI1Njk4NzV9.UxIa6hRwR3P4p92d9HY-2suvaCbHi-4sp3zUvNqMW4w
 
 ###
-POSt http://localhost:8000/api/user/
+POST http://localhost:8000/api/users
+Content-Type: application/json
+
+{
+    "pageSize" : 1,
+    "searchText" : "Ganzoo"
+}
+###
+GET http://localhost:8000/api/user/6434f205c6a236e8814af1ed
 
 ###
 POST http://localhost:8000/api/user
@@ -27,6 +35,14 @@ Content-Type: application/json
 DELETE http://localhost:8000/api/user/6434ed7e8b232f101bfbb4fa
 
 ###
+POST http://localhost:8000/api/categories
+Content-Type: application/json
+
+{
+    "searchText" : "Ном"
+}
+
+###
 GET http://localhost:8000/api/category
 
 ###
@@ -46,25 +62,33 @@ Content-Type: application/json
     "password" : "123"
 }
 
+###
+GET http://localhost:8000/api/item
+###
+POST http://localhost:8000/api/items
+Content-Type: application/json
+
+{
+    "pageSize" : 1,
+    "searchText" : "bag"
+}
 
 ###
 GET http://localhost:8000/api/item
-
-###
-GET http://localhost:8000/api/item/
 
 ###
 POST http://localhost:8000/api/item
 Content-Type: application/json
 
 {
-  "itemName" : "Short",
+  "itemName" : "Gun",
   "itemPhoto" : "hi",
   "categoryId" : "6434f24ea29bc8df661b4240",
   "phoneNumber" : 89018416,
   "rating" : 5,
   "rentalPrice" : 10000,
-  "rentalDate" : "24hours",
+  "rentalStartDate" : "2023-04-25",
+  "rentalEndDate" : "2023-05-01",
   "description" : "hello"
 
 }
