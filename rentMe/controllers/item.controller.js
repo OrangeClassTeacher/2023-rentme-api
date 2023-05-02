@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
+//hi
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield item_model_1.default.find({});

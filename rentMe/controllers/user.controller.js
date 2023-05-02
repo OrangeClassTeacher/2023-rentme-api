@@ -13,9 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.createUser = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
-// const User = require("../models/user.model");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
 const user_model_1 = __importDefault(require("../models/user.model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
