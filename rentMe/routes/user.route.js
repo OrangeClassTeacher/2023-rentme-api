@@ -6,7 +6,7 @@ const route = (0, express_1.Router)();
 route
     .get("/users", user_controller_1.getAll)
     .post("/users", user_controller_1.getAllWithSearch)
-    .post("/user/:_id", user_controller_1.getOne)
+    .get("/user/:_id", user_controller_1.getOne)
     .post("/user", user_controller_1.createUser)
     .put("/user/:_id", user_controller_1.updateUser)
     .delete("/user/:_id", user_controller_1.deleteUser)

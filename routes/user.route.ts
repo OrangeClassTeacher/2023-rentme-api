@@ -15,7 +15,7 @@ const route = Router();
 route
   .get("/users", getAll)
   .post("/users", getAllWithSearch)
-  .post("/user/:_id", getOne)
+  .get("/user/:_id", getOne)
   .post("/user", createUser)
   .put("/user/:_id", updateUser)
   .delete("/user/:_id", deleteUser)
