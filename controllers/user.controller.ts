@@ -92,11 +92,17 @@ const login = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   const { _id } = req.params;
-  try {
-    const result = await User.findByIdAndUpdate({ _id }, req.body);
-    res.json({ status: true, result });
-  } catch (err) {
-    res.json({ status: false, message: err });
+  const { password } = req.body;
+  if (password) {
+    const hashedPass = await bcrypt.hash(password, 10);
+    console.log(hashedPass);
+    const newObj = { ...req.body, password: hashedPass };
+    try {
+      const result = await User.findByIdAndUpdate({ _id }, newObj);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
   }
 };
 const deleteUser = async (req: Request, res: Response) => {
