@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
+exports.getAllWithUser = exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
 const ratingCount = [
     { rating: 4.5, count: 0 },
@@ -53,6 +53,20 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getAll = getAll;
+const getAllWithUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { createdUser } = req.body;
+    const filter = {
+        createdUser: { $regex: createdUser },
+    };
+    try {
+        const result = yield item_model_1.default.find(filter);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getAllWithUser = getAllWithUser;
 const getOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
