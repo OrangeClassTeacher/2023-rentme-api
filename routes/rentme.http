@@ -84,6 +84,14 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8000/api/itemUser
+Content-Type: application/json
+
+{
+    "createdUser" : "64529ab1e4c101a725ebb373"
+}
+
+###
 GET http://localhost:8000/api/item
 
 ###
