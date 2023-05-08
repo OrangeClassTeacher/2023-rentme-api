@@ -49,8 +49,8 @@ GET http://localhost:8000/api/category
 POST http://localhost:8000/api/category
 Content-Type: application/json
 
-{
-    "categoryName" : "Mantuun Buuz"
+{    
+    "categoryName" : "Бусад"
 }
 
 ###

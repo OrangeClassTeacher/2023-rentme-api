@@ -1,5 +1,6 @@
 import mongoose, { Collection, Schema } from "mongoose";
 interface IItem {
+  createdUser: string;
   itemName: string;
   itemPhoto: string;
   itemSlidePhoto: [string];
@@ -13,6 +14,10 @@ interface IItem {
   description: string;
 }
 const itemSchema = new Schema<IItem>({
+  createdUser: {
+    type: String,
+    required: true,
+  },
   itemName: {
     type: String,
     required: true,

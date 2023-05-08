@@ -19,7 +19,7 @@ dotenv_1.default.config();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 const port = process.env.PORT || "";
-const MONGO_DB_URL = process.env.MONGO_DB_URI || "";
+const MONGO_DB_URL = process.env.MONGO_DB_URL || "";
 // console.log(MONGO_DB_URL);
 mongoose_1.default
     .connect(MONGO_DB_URL)
