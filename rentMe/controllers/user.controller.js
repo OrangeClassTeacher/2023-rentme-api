@@ -109,12 +109,18 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.login = login;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
-    try {
-        const result = yield user_model_1.default.findByIdAndUpdate({ _id }, req.body);
-        res.json({ status: true, result });
-    }
-    catch (err) {
-        res.json({ status: false, message: err });
+    const { password } = req.body;
+    if (password) {
+        const hashedPass = yield bcrypt_1.default.hash(password, 10);
+        console.log(hashedPass);
+        const newObj = Object.assign(Object.assign({}, req.body), { password: hashedPass });
+        try {
+            const result = yield user_model_1.default.findByIdAndUpdate({ _id }, newObj);
+            res.json({ status: true, result });
+        }
+        catch (err) {
+            res.json({ status: false, message: err });
+        }
     }
 });
 exports.updateUser = updateUser;
