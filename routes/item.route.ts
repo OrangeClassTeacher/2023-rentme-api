@@ -6,12 +6,14 @@ import {
   deleteItem,
   updateItem,
   getAllWithSearch,
+  getAllWithUser,
 } from "../controllers/item.controller";
 
 const route = Router();
 
 route
   .post("/items", getAllWithSearch)
+  .post("/itemUser", getAllWithUser)
   .get("/item", getAll)
   .get("/item/:_id", getOne)
   .post("/item", createItem)

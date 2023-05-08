@@ -1,7 +1,6 @@
 import Item from "../models/item.model";
 import { Request, Response } from "express";
 
-
 const ratingCount = [
   { rating: 4.5, count: 0 },
   { rating: 4, count: 0 },
@@ -30,11 +29,22 @@ const getAllWithSearch = async (req: Request, res: Response) => {
   }
 };
 const getAll = async (req: Request, res: Response) => {
-
   console.log("Test");
-  
+
   try {
     const result = await Item.find({});
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
+const getAllWithUser = async (req: Request, res: Response) => {
+  const { createdUser } = req.body;
+  const filter = {
+    createdUser: { $regex: createdUser },
+  };
+  try {
+    const result = await Item.find(filter);
     res.json({ status: true, result });
   } catch (err) {
     res.json({ status: false, message: err });
@@ -80,4 +90,12 @@ const deleteItem = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
-export { getAll, getOne, deleteItem, updateItem, createItem, getAllWithSearch };
+export {
+  getAll,
+  getOne,
+  deleteItem,
+  updateItem,
+  createItem,
+  getAllWithSearch,
+  getAllWithUser,
+};
