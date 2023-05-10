@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllWithUser = exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
+exports.getItem = exports.getAllWithUser = exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
 const ratingCount = [
     { rating: 4.5, count: 0 },
@@ -42,6 +42,20 @@ const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getAllWithSearch = getAllWithSearch;
+const getItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield item_model_1.default.aggregate([
+            { $project: { categoryId: 1, itemName: 1 } },
+            { $group: { _id: "$categoryId", count: { $count: {} } } },
+            { $sort: { count: -1 } },
+        ]).limit(5);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getItem = getItem;
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Test");
     try {

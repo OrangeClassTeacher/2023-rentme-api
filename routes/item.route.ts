@@ -7,6 +7,7 @@ import {
   updateItem,
   getAllWithSearch,
   getAllWithUser,
+  getItem,
 } from "../controllers/item.controller";
 
 const route = Router();
@@ -18,6 +19,7 @@ route
   .get("/item/:_id", getOne)
   .post("/item", createItem)
   .put("/item/:_id", updateItem)
-  .delete("/item/:_id", deleteItem);
+  .delete("/item/:_id", deleteItem)
+  .get("/items", getItem);
 
 export default route;
