@@ -28,6 +28,18 @@ const getAllWithSearch = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
+const getItem = async (req: Request, res: Response) => {
+  try {
+    const result = await Item.aggregate([
+      { $project: { categoryId: 1, itemName: 1 } },
+      { $group: { _id: "$categoryId", count: { $count: {} } } },
+      { $sort: { count: -1 } },
+    ]).limit(5);
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
 const getAll = async (req: Request, res: Response) => {
   console.log("Test");
 
@@ -98,4 +110,5 @@ export {
   createItem,
   getAllWithSearch,
   getAllWithUser,
+  getItem,
 };
