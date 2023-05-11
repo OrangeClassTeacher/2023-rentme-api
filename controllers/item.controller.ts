@@ -40,6 +40,18 @@ const getItem = async (req: Request, res: Response) => {
     res.json({ status: false, message: err });
   }
 };
+const getAllWithDate = async (req: Request, res: Response) => {
+  console.log("dfdz");
+
+  try {
+    const result = await Item.aggregate([{ $sort: { createdAt: -1 } }]).limit(
+      20
+    );
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
 const getAll = async (req: Request, res: Response) => {
   console.log("Test");
 
@@ -111,4 +123,5 @@ export {
   getAllWithSearch,
   getAllWithUser,
   getItem,
+  getAllWithDate,
 };

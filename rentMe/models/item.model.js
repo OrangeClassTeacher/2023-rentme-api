@@ -66,6 +66,6 @@ const itemSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-});
+}, { timestamps: true });
 const Item = mongoose_1.default.model("Items", itemSchema);
 exports.default = Item;

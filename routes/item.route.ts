@@ -7,6 +7,7 @@ import {
   updateItem,
   getAllWithSearch,
   getAllWithUser,
+  getAllWithDate,
   getItem,
 } from "../controllers/item.controller";
 
@@ -20,6 +21,7 @@ route
   .post("/item", createItem)
   .put("/item/:_id", updateItem)
   .delete("/item/:_id", deleteItem)
-  .get("/items", getItem);
+  .get("/items", getItem)
+  .get("/itemsDate", getAllWithDate);
 
 export default route;

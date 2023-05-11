@@ -19,7 +19,7 @@ PUT http://localhost:8000/api/user/64529ab1e4c101a725ebb373
 Content-Type: application/json
 
 {
-    "password" : "123"
+    "password" : "12345"
 }
 
 
@@ -75,6 +75,8 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:8000/api/items
+###
 GET http://localhost:8000/api/item
 ###
 POST http://localhost:8000/api/items
@@ -84,6 +86,8 @@ Content-Type: application/json
     "pageSize" : 1,
     "searchText" : "bag"
 }
+###
+GET http://localhost:8000/api/itemsDate
 
 ###
 GET http://localhost:8000/api/item
