@@ -109,7 +109,7 @@ const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(req.body);
         if (newObj) {
             const result = yield item_model_1.default.create(newObj);
-            res.json({ status: true, result });
+            res.json({ status: true, result, message: "" });
         }
     }
     catch (err) {

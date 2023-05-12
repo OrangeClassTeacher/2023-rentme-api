@@ -90,7 +90,7 @@ const createItem = async (req: Request, res: Response) => {
     console.log(req.body);
     if (newObj) {
       const result = await Item.create(newObj);
-      res.json({ status: true, result });
+      res.json({ status: true, result, message: "" });
     }
   } catch (err) {
     res.json({ status: false, message: err });

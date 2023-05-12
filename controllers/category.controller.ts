@@ -35,6 +35,7 @@ const getOne = async (req: Request, res: Response) => {
 
 const createCategory = async (req: Request, res: Response) => {
   const newObj = req.body;
+
   try {
     console.log(req.body);
     if (newObj) {
@@ -56,6 +57,11 @@ const updateCategory = async (req: Request, res: Response) => {
 };
 const deleteCategory = async (req: Request, res: Response) => {
   const { _id } = req.params;
+
+  if (!_id) {
+    res.json({ status: false, message: "param not found" });
+    return;
+  }
   try {
     const result = await Category.findByIdAndDelete({ _id });
     res.json({ status: true, result });

@@ -76,6 +76,10 @@ const updateCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.updateCategory = updateCategory;
 const deleteCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
+    if (!_id) {
+        res.json({ status: false, message: "param not found" });
+        return;
+    }
     try {
         const result = yield category_1.default.findByIdAndDelete({ _id });
         res.json({ status: true, result });
