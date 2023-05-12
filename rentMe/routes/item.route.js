@@ -11,5 +11,6 @@ route
     .post("/item", item_controller_1.createItem)
     .put("/item/:_id", item_controller_1.updateItem)
     .delete("/item/:_id", item_controller_1.deleteItem)
-    .get("/items", item_controller_1.getItem);
+    .get("/items", item_controller_1.getItem)
+    .get("/itemsDate", item_controller_1.getAllWithDate);
 exports.default = route;

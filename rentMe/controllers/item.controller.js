@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getItem = exports.getAllWithUser = exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
+exports.getAllWithDate = exports.getItem = exports.getAllWithUser = exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
 const ratingCount = [
     { rating: 4.5, count: 0 },
@@ -56,6 +56,17 @@ const getItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getItem = getItem;
+const getAllWithDate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("dfdz");
+    try {
+        const result = yield item_model_1.default.aggregate([{ $sort: { createdAt: -1 } }]).limit(20);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getAllWithDate = getAllWithDate;
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Test");
     try {
@@ -98,7 +109,7 @@ const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(req.body);
         if (newObj) {
             const result = yield item_model_1.default.create(newObj);
-            res.json({ status: true, result });
+            res.json({ status: true, result, message: "" });
         }
     }
     catch (err) {

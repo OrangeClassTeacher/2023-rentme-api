@@ -13,48 +13,51 @@ interface IItem {
   rentalEndDate: Date;
   description: string;
 }
-const itemSchema = new Schema<IItem>({
-  createdUser: {
-    type: String,
-    required: true,
+const itemSchema = new Schema<IItem>(
+  {
+    createdUser: {
+      type: String,
+      required: true,
+    },
+    itemName: {
+      type: String,
+      required: true,
+    },
+    itemPhoto: {
+      type: String,
+      required: true,
+    },
+    itemSlidePhoto: {
+      type: [String],
+    },
+    categoryId: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
+      required: true,
+    },
+    rating: Number,
+    itemComment: String,
+    rentalPrice: {
+      type: Number,
+      required: true,
+    },
+    rentalStartDate: {
+      type: Date,
+      required: true,
+    },
+    rentalEndDate: {
+      type: Date,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
   },
-  itemName: {
-    type: String,
-    required: true,
-  },
-  itemPhoto: {
-    type: String,
-    required: true,
-  },
-  itemSlidePhoto: {
-    type: [String],
-  },
-  categoryId: {
-    type: String,
-    required: true,
-  },
-  phoneNumber: {
-    type: Number,
-    required: true,
-  },
-  rating: Number,
-  itemComment: String,
-  rentalPrice: {
-    type: Number,
-    required: true,
-  },
-  rentalStartDate: {
-    type: Date,
-    required: true,
-  },
-  rentalEndDate: {
-    type: Date,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 const Item = mongoose.model("Items", itemSchema);
 export default Item;
