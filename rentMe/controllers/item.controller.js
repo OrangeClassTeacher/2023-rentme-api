@@ -14,38 +14,72 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllWithDate = exports.getItem = exports.getAllWithUser = exports.getAllWithSearch = exports.createItem = exports.updateItem = exports.deleteItem = exports.getOne = exports.getAll = void 0;
 const item_model_1 = __importDefault(require("../models/item.model"));
-const ratingCount = [
-    { rating: 4.5, count: 0 },
-    { rating: 4, count: 0 },
-    { rating: 3.5, count: 0 },
-    { rating: 3, count: 0 },
-];
-//hi
 const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { pageSize, searchText } = req.body;
-    // const count = pageSize * 30 +1
-    const filter1 = {
-        $or: searchText && [
-            { itemName: { $regex: searchText } },
-            { description: { $regex: searchText } },
-        ],
-    };
-    try {
-        const rowCount = yield item_model_1.default.find(filter1).count();
-        console.log(rowCount);
-        const skips = 10 * (pageSize - 1);
-        const result = yield item_model_1.default.find(filter1).skip(skips).limit(10);
-        res.json({ status: true, result });
+    const { pageSize, searchText, sort } = req.body;
+    if (!searchText) {
+        const pageNum = pageSize ? pageSize : 1;
+        try {
+            const skips = 10 * (pageNum - 1);
+            const result = yield item_model_1.default.find().skip(skips).limit(10).sort(sort);
+            console.log("result1");
+            res.json({ status: true, result });
+        }
+        catch (err) {
+            res.json({ status: false, message: err });
+        }
     }
-    catch (err) {
-        res.json({ status: false, message: err });
+    if (!sort) {
+        const pageNum = pageSize ? pageSize : 1;
+        try {
+            console.log("result2");
+            const skips = 10 * (pageNum - 1);
+            const result = yield item_model_1.default.find({
+                itemName: { $regex: searchText, $options: "i" },
+            })
+                .skip(skips)
+                .limit(10);
+            res.json({ status: true, result });
+        }
+        catch (err) {
+            res.json({ status: false, message: err });
+        }
+    }
+    if (!sort && !searchText) {
+        try {
+            const pageNum = pageSize ? pageSize : 1;
+            const skips = 10 * (pageNum - 1);
+            const result = yield item_model_1.default.find().skip(skips);
+            res.json({ status: true, result });
+        }
+        catch (err) {
+            res.json({ status: false, message: err });
+        }
+    }
+    if (searchText && sort) {
+        console.log(sort);
+        try {
+            console.log("result3");
+            const pageNum = pageSize ? pageSize : 1;
+            const skips = 10 * (pageNum - 1);
+            const result = yield item_model_1.default.find({
+                itemName: { $regex: searchText, $options: "i" },
+            })
+                .skip(skips)
+                .sort(sort)
+                .limit(10);
+            console.log(result);
+            res.json({ status: true, result });
+        }
+        catch (err) {
+            res.json({ status: false, message: err });
+        }
     }
 });
 exports.getAllWithSearch = getAllWithSearch;
 const getItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield item_model_1.default.aggregate([
-            { $project: { categoryId: 1, itemName: 1 } },
+            { $project: { categoryId: 1 } },
             { $group: { _id: "$categoryId", count: { $count: {} } } },
             { $sort: { count: -1 } },
         ]).limit(5);
@@ -83,6 +117,9 @@ const getAllWithUser = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const filter = {
         createdUser: { $regex: createdUser },
     };
+    if (!createdUser) {
+        res.json({ status: false, message: "User not found" });
+    }
     try {
         const result = yield item_model_1.default.find(filter);
         res.json({ status: true, result });
@@ -105,12 +142,12 @@ const getOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getOne = getOne;
 const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newObj = req.body;
+    if (!newObj) {
+        res.json({ status: false, message: "Medeelle oruuulna uu!!" });
+    }
     try {
-        console.log(req.body);
-        if (newObj) {
-            const result = yield item_model_1.default.create(newObj);
-            res.json({ status: true, result, message: "" });
-        }
+        const result = yield item_model_1.default.create(newObj);
+        res.json({ status: true, result, message: "" });
     }
     catch (err) {
         res.json({ status: false, message: err });
@@ -119,6 +156,9 @@ const createItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.createItem = createItem;
 const updateItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
+    if (!_id) {
+        res.json({ status: false, message: "Id " });
+    }
     try {
         const result = yield item_model_1.default.findByIdAndUpdate({ _id }, req.body);
         res.json({ status: true, result });
@@ -130,6 +170,9 @@ const updateItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.updateItem = updateItem;
 const deleteItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
+    if (!_id) {
+        res.json({ status: false, message: "Id oruulna uu" });
+    }
     try {
         const result = yield item_model_1.default.findByIdAndDelete({ _id });
         res.json({ status: true, result });

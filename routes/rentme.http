@@ -83,8 +83,9 @@ POST http://localhost:8000/api/items
 Content-Type: application/json
 
 {
-    "pageSize" : 1,
-    "searchText" : "bag"
+    "searchText" : "ganzo",
+    "sort" : {"rating" : -1}
+    
 }
 ###
 GET http://localhost:8000/api/itemsDate

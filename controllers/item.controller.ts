@@ -1,37 +1,69 @@
 import Item from "../models/item.model";
 import { Request, Response } from "express";
-
-const ratingCount = [
-  { rating: 4.5, count: 0 },
-  { rating: 4, count: 0 },
-  { rating: 3.5, count: 0 },
-  { rating: 3, count: 0 },
-];
-//hi
 const getAllWithSearch = async (req: Request, res: Response) => {
-  const { pageSize, searchText } = req.body;
-  // const count = pageSize * 30 +1
-  const filter1 = {
-    $or: searchText && [
-      { itemName: { $regex: searchText } },
-      { description: { $regex: searchText } },
-    ],
-  };
-  try {
-    const rowCount = await Item.find(filter1).count();
-    console.log(rowCount);
-    const skips = 10 * (pageSize - 1);
-    const result = await Item.find(filter1).skip(skips).limit(10);
+  const { pageSize, searchText, sort } = req.body;
+  if (!searchText) {
+    const pageNum = pageSize ? pageSize : 1;
+    try {
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find().skip(skips).limit(10).sort(sort);
+      console.log("result1");
 
-    res.json({ status: true, result });
-  } catch (err) {
-    res.json({ status: false, message: err });
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+  if (!sort) {
+    const pageNum = pageSize ? pageSize : 1;
+    try {
+      console.log("result2");
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find({
+        itemName: { $regex: searchText, $options: "i" },
+      })
+        .skip(skips)
+        .limit(10);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+  if (!sort && !searchText) {
+    try {
+      const pageNum = pageSize ? pageSize : 1;
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find().skip(skips);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+  if (searchText && sort) {
+    console.log(sort);
+
+    try {
+      console.log("result3");
+
+      const pageNum = pageSize ? pageSize : 1;
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find({
+        itemName: { $regex: searchText, $options: "i" },
+      })
+        .skip(skips)
+        .sort(sort)
+        .limit(10);
+      console.log(result);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
   }
 };
 const getItem = async (req: Request, res: Response) => {
   try {
     const result = await Item.aggregate([
-      { $project: { categoryId: 1, itemName: 1 } },
+      { $project: { categoryId: 1 } },
       { $group: { _id: "$categoryId", count: { $count: {} } } },
       { $sort: { count: -1 } },
     ]).limit(5);
@@ -42,7 +74,6 @@ const getItem = async (req: Request, res: Response) => {
 };
 const getAllWithDate = async (req: Request, res: Response) => {
   console.log("dfdz");
-
   try {
     const result = await Item.aggregate([{ $sort: { createdAt: -1 } }]).limit(
       20
@@ -67,6 +98,9 @@ const getAllWithUser = async (req: Request, res: Response) => {
   const filter = {
     createdUser: { $regex: createdUser },
   };
+  if (!createdUser) {
+    res.json({ status: false, message: "User not found" });
+  }
   try {
     const result = await Item.find(filter);
     res.json({ status: true, result });
@@ -86,18 +120,21 @@ const getOne = async (req: Request, res: Response) => {
 
 const createItem = async (req: Request, res: Response) => {
   const newObj = req.body;
+  if (!newObj) {
+    res.json({ status: false, message: "Medeelle oruuulna uu!!" });
+  }
   try {
-    console.log(req.body);
-    if (newObj) {
-      const result = await Item.create(newObj);
-      res.json({ status: true, result, message: "" });
-    }
+    const result = await Item.create(newObj);
+    res.json({ status: true, result, message: "" });
   } catch (err) {
     res.json({ status: false, message: err });
   }
 };
 const updateItem = async (req: Request, res: Response) => {
   const { _id } = req.params;
+  if (!_id) {
+    res.json({ status: false, message: "Id " });
+  }
   try {
     const result = await Item.findByIdAndUpdate({ _id }, req.body);
     res.json({ status: true, result });
@@ -107,6 +144,9 @@ const updateItem = async (req: Request, res: Response) => {
 };
 const deleteItem = async (req: Request, res: Response) => {
   const { _id } = req.params;
+  if (!_id) {
+    res.json({ status: false, message: "Id oruulna uu" });
+  }
   try {
     const result = await Item.findByIdAndDelete({ _id });
     res.json({ status: true, result });
