@@ -122,6 +122,13 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             res.json({ status: false, message: err });
         }
     }
+    try {
+        const result = yield user_model_1.default.findByIdAndUpdate({ _id }, req.body);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
 });
 exports.updateUser = updateUser;
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

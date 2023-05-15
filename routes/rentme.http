@@ -15,11 +15,11 @@ GET http://localhost:8000/api/user/6434f205c6a236e8814af1ed
 
 
 ###
-PUT http://localhost:8000/api/user/64529ab1e4c101a725ebb373
+PUT http://localhost:8000/api/user/6453225c09a7a9a8299547cc
 Content-Type: application/json
 
 {
-    "password" : "12345"
+    "profilePic" : "https://res.cloudinary.com/devfpr9pm/image/upload/v1683680006/RentMeUser/vzn0zktc34vhhklfkj6z.png"
 }
 
 
@@ -84,7 +84,7 @@ Content-Type: application/json
 
 {
     "searchText" : "ganzo",
-    "sort" : {"rating" : -1}
+    "sort" : {"rentalPrice" : 1}
     
 }
 ###

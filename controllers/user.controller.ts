@@ -104,6 +104,12 @@ const updateUser = async (req: Request, res: Response) => {
       res.json({ status: false, message: err });
     }
   }
+  try {
+    const result = await User.findByIdAndUpdate({ _id }, req.body);
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
 };
 const deleteUser = async (req: Request, res: Response) => {
   const { _id } = req.params;
