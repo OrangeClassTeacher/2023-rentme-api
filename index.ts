@@ -7,9 +7,7 @@ import categoryRoute from "./routes/category.route";
 import itemRoute from "./routes/item.route";
 import adminRoute from "./routes/admin.route";
 import employeeRoute from "./routes/employee.route";
-// import firebase from "firebase";
-// import firebaseConfig from "./config/firebaseConfig";
-
+import commentRoute from "./routes/comment.route";
 const app = express();
 
 dotenv.config();
@@ -31,6 +29,7 @@ app.use("/api", categoryRoute);
 app.use("/api", itemRoute);
 app.use("/api", adminRoute);
 app.use("/api", employeeRoute);
+app.use("/api", commentRoute);
 app.listen(port, () => {
   console.log(`Server is running on ${port}.`);
 });
