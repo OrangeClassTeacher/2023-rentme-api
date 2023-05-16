@@ -3,7 +3,7 @@ import {getOne , getAll , createEmployee , deleteEmployee , updateEmployee} from
 
 
 const route = Router();
-
+//hi
 route.get("/employee",  getAll)
 .get("/employee/:_id",  getOne)
 .post("/employee" , createEmployee)

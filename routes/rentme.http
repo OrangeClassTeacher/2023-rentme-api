@@ -2,7 +2,25 @@
 GET http://localhost:8000/api/user
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgxNzk1NzU0LCJleHAiOjE2ODE4ODIxNTR9.ndN5GZafLNGxUCdtSVn1TxY9bQYsuE6Vz4vU0VG85m4
 ###
-POSt http://localhost:8000/api/user/
+POST http://localhost:8000/api/users
+Content-Type: application/json
+
+{
+    "pageSize" : 1,
+    "searchText" : "Ganzoo"
+}
+###
+GET http://localhost:8000/api/user/6434f205c6a236e8814af1ed
+
+
+###
+PUT http://localhost:8000/api/user/6453225c09a7a9a8299547cc
+Content-Type: application/json
+
+{
+    "profilePic" : "https://res.cloudinary.com/devfpr9pm/image/upload/v1683680006/RentMeUser/vzn0zktc34vhhklfkj6z.png"
+}
+
 
 ###
 POST http://localhost:8000/api/user
@@ -26,15 +44,29 @@ Content-Type: application/json
 DELETE http://localhost:8000/api/user/6434ed7e8b232f101bfbb4fa
 
 ###
+POST http://localhost:8000/api/categories
+Content-Type: application/json
+
+{
+    "searchText" : "Ном"
+}
+
+
+###
 GET http://localhost:8000/api/category
 
 ###
 POST http://localhost:8000/api/category
 Content-Type: application/json
 
+<<<<<<< HEAD
 {
     "parentId" : "643e60f763813abf8b96a5ed",
     "categoryName" : "Эрэгтэй"
+=======
+{    
+    "categoryName" : "Бусад"
+>>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
 }
 
 ###
@@ -46,6 +78,21 @@ Content-Type: application/json
     "password" : "123"
 }
 
+###
+GET http://localhost:8000/api/items
+###
+GET http://localhost:8000/api/item
+###
+POST http://localhost:8000/api/items
+Content-Type: application/json
+
+{
+    "searchText" : "ganzo",
+    "sort" : {"rentalPrice" : 1}
+    
+}
+###
+GET http://localhost:8000/api/itemsDate
 
 ###
 POST http://localhost:8000/api/items
@@ -57,20 +104,22 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/api/item/
-
-###
 POST http://localhost:8000/api/item
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
   "itemName" : "ball",
+=======
+  "itemName" : "Gun",
+>>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
   "itemPhoto" : "hi",
   "categoryId" : "6434f24ea29bc8df661b4240",
   "phoneNumber" : 89018416,
   "rating" : 5,
   "rentalPrice" : 10000,
-  "rentalDate" : "24hours",
+  "rentalStartDate" : "2023-04-25",
+  "rentalEndDate" : "2023-05-01",
   "description" : "hello"
 
 }

@@ -1,38 +1,114 @@
+import Item from "../models/item.model";
+import { Request, Response } from "express";
+const getAllWithSearch = async (req: Request, res: Response) => {
+  const { pageSize, searchText, sort } = req.body;
+  if (!searchText) {
+    const pageNum = pageSize ? pageSize : 1;
+    try {
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find().skip(skips).limit(10).sort(sort);
+      console.log("result1");
 
-import Item from "../models/item.model"
-import  {Request , Response} from "express"
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+  if (!sort) {
+    const pageNum = pageSize ? pageSize : 1;
+    try {
+      console.log("result2");
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find({
+        itemName: { $regex: searchText, $options: "i" },
+      })
+        .skip(skips)
+        .limit(10);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+  if (!sort && !searchText) {
+    try {
+      const pageNum = pageSize ? pageSize : 1;
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find().skip(skips);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+  if (searchText && sort) {
+    console.log(sort);
 
+    try {
+      console.log("result3");
 
-const getAll = async (req : Request, res : Response) => {
-  const {pageSize, searchText , sort } = req.body
+      const pageNum = pageSize ? pageSize : 1;
+      const skips = 10 * (pageNum - 1);
+      const result = await Item.find({
+        itemName: { $regex: searchText, $options: "i" },
+      })
+        .skip(skips)
+        .sort(sort)
+        .limit(10);
+      console.log(result);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
+  }
+};
+const getItem = async (req: Request, res: Response) => {
   try {
-const filter1 = {
-    $or: 
-      searchText && [
-        { itemName: { $regex: searchText } },
-        { description: { $regex: searchText } },
-      ],
-  };
-// console.log(filter);
-
-  const skips : number = 10 * (pageSize - 1) 
-  const result = await Item.find(filter1)
-  .limit(28)
-  .skip(skips)
-  // .select({itemPhoto : 1 , itemName : 1 , phoneNumber : 1 , rentalPrice : 1 , rentalDate : 1, discription : 1});
- console.log(result);
- 
-  if(result){
-  res.json({ status: true, result });
- }else{
-  res.json({status : false , message : "Not Found"})
-}  
+    const result = await Item.aggregate([
+      { $project: { categoryId: 1 } },
+      { $group: { _id: "$categoryId", count: { $count: {} } } },
+      { $sort: { count: -1 } },
+    ]).limit(5);
+    res.json({ status: true, result });
   } catch (err) {
     res.json({ status: false, message: err });
   }
 };
+const getAllWithDate = async (req: Request, res: Response) => {
+  console.log("dfdz");
+  try {
+    const result = await Item.aggregate([{ $sort: { createdAt: -1 } }]).limit(
+      20
+    );
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
+const getAll = async (req: Request, res: Response) => {
+  console.log("Test");
 
-const getOne = async (req : Request, res : Response) => {
+  try {
+    const result = await Item.find({});
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
+const getAllWithUser = async (req: Request, res: Response) => {
+  const { createdUser } = req.body;
+  const filter = {
+    createdUser: { $regex: createdUser },
+  };
+  if (!createdUser) {
+    res.json({ status: false, message: "User not found" });
+  }
+  try {
+    const result = await Item.find(filter);
+    res.json({ status: true, result });
+  } catch (err) {
+    res.json({ status: false, message: err });
+  }
+};
+const getOne = async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
     const result = await Item.findById({ _id });
@@ -42,20 +118,23 @@ const getOne = async (req : Request, res : Response) => {
   }
 };
 
-const createItem = async (req : Request, res : Response) => {
+const createItem = async (req: Request, res: Response) => {
   const newObj = req.body;
+  if (!newObj) {
+    res.json({ status: false, message: "Medeelle oruuulna uu!!" });
+  }
   try {
-    console.log(req.body);
-    if (newObj) {
-      const result = await Item.create(newObj);
-      res.json({ status: true, result });
-    }
+    const result = await Item.create(newObj);
+    res.json({ status: true, result, message: "" });
   } catch (err) {
     res.json({ status: false, message: err });
   }
 };
-const updateItem = async (req : Request, res : Response) => {
+const updateItem = async (req: Request, res: Response) => {
   const { _id } = req.params;
+  if (!_id) {
+    res.json({ status: false, message: "Id " });
+  }
   try {
     const result = await Item.findByIdAndUpdate({ _id }, req.body);
     res.json({ status: true, result });
@@ -63,8 +142,11 @@ const updateItem = async (req : Request, res : Response) => {
     res.json({ status: false, message: err });
   }
 };
-const deleteItem = async (req : Request, res : Response) => {
+const deleteItem = async (req: Request, res: Response) => {
   const { _id } = req.params;
+  if (!_id) {
+    res.json({ status: false, message: "Id oruulna uu" });
+  }
   try {
     const result = await Item.findByIdAndDelete({ _id });
     res.json({ status: true, result });
@@ -72,4 +154,14 @@ const deleteItem = async (req : Request, res : Response) => {
     res.json({ status: false, message: err });
   }
 };
-export {getAll , getOne , deleteItem, updateItem , createItem}
+export {
+  getAll,
+  getOne,
+  deleteItem,
+  updateItem,
+  createItem,
+  getAllWithSearch,
+  getAllWithUser,
+  getItem,
+  getAllWithDate,
+};

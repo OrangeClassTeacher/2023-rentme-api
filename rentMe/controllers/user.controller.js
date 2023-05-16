@@ -12,13 +12,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.createUser = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
-// const User = require("../models/user.model");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+exports.getAllWithSearch = exports.login = exports.createUser = exports.updateUser = exports.deleteUser = exports.getOne = exports.getAll = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const getAllWithSearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { pageSize, searchText } = req.body;
+    // const count = pageSize * 30 +1
+    console.log(pageSize, searchText);
+    const filter1 = {
+        $or: searchText && [
+            { fisrtName: { $regex: searchText } },
+            { lastName: { $regex: searchText } },
+            { Username: { $regex: searchText } },
+            { email: { $regex: searchText } },
+        ],
+    };
+    try {
+        const rowCount = yield user_model_1.default.find(filter1).count();
+        console.log(rowCount);
+        const skips = 10 * (pageSize - 1);
+        const result = yield user_model_1.default.find(filter1).skip(skips).limit(10);
+        res.json({ status: true, result });
+    }
+    catch (err) {
+        res.json({ status: false, message: err });
+    }
+});
+exports.getAllWithSearch = getAllWithSearch;
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield user_model_1.default.find({});
@@ -74,7 +95,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         res
             .status(200)
-            .send({ status: true, data: user, message: "Success", token });
+            .send({ status: true, result: user, message: "Success", token });
         return;
     }
     else {
@@ -88,6 +109,19 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.login = login;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
+    const { password } = req.body;
+    if (password) {
+        const hashedPass = yield bcrypt_1.default.hash(password, 10);
+        console.log(hashedPass);
+        const newObj = Object.assign(Object.assign({}, req.body), { password: hashedPass });
+        try {
+            const result = yield user_model_1.default.findByIdAndUpdate({ _id }, newObj);
+            res.json({ status: true, result });
+        }
+        catch (err) {
+            res.json({ status: false, message: err });
+        }
+    }
     try {
         const result = yield user_model_1.default.findByIdAndUpdate({ _id }, req.body);
         res.json({ status: true, result });
