@@ -12,8 +12,7 @@ const category_route_1 = __importDefault(require("./routes/category.route"));
 const item_route_1 = __importDefault(require("./routes/item.route"));
 const admin_route_1 = __importDefault(require("./routes/admin.route"));
 const employee_route_1 = __importDefault(require("./routes/employee.route"));
-// import firebase from "firebase";
-// import firebaseConfig from "./config/firebaseConfig";
+const comment_route_1 = __importDefault(require("./routes/comment.route"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 app.use((0, cors_1.default)());
@@ -30,6 +29,7 @@ app.use("/api", category_route_1.default);
 app.use("/api", item_route_1.default);
 app.use("/api", admin_route_1.default);
 app.use("/api", employee_route_1.default);
+app.use("/api", comment_route_1.default);
 app.listen(port, () => {
     console.log(`Server is running on ${port}.`);
 });
