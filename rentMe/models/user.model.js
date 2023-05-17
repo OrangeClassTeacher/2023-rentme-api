@@ -71,6 +71,8 @@ const userSchema = new mongoose_1.Schema({
         enum: ["Male", "Female"],
         required: true,
     },
+    followers: [String],
+    following: [String],
     favItems: [String],
 });
 const User = mongoose_1.default.model("users", userSchema);

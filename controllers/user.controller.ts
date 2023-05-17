@@ -93,6 +93,7 @@ const login = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   const { _id } = req.params;
   const { password } = req.body;
+
   if (password) {
     const hashedPass = await bcrypt.hash(password, 10);
     console.log(hashedPass);
@@ -103,12 +104,14 @@ const updateUser = async (req: Request, res: Response) => {
     } catch (err) {
       res.json({ status: false, message: err });
     }
-  }
-  try {
-    const result = await User.findByIdAndUpdate({ _id }, req.body);
-    res.json({ status: true, result });
-  } catch (err) {
-    res.json({ status: false, message: err });
+  } else {
+    try {
+      console.log(req.body);
+      const result = await User.findByIdAndUpdate({ _id }, req.body);
+      res.json({ status: true, result });
+    } catch (err) {
+      res.json({ status: false, message: err });
+    }
   }
 };
 const deleteUser = async (req: Request, res: Response) => {

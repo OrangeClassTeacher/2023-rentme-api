@@ -1,6 +1,7 @@
 ###
-GET http://localhost:8000/api/user
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgxNzk1NzU0LCJleHAiOjE2ODE4ODIxNTR9.ndN5GZafLNGxUCdtSVn1TxY9bQYsuE6Vz4vU0VG85m4
+GET http://localhost:8000/api/users
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgyNDgzNDc1LCJleHAiOjE2ODI1Njk4NzV9.UxIa6hRwR3P4p92d9HY-2suvaCbHi-4sp3zUvNqMW4w
+
 ###
 POST http://localhost:8000/api/users
 Content-Type: application/json
@@ -18,7 +19,7 @@ PUT http://localhost:8000/api/user/6453225c09a7a9a8299547cc
 Content-Type: application/json
 
 {
-    "profilePic" : "https://res.cloudinary.com/devfpr9pm/image/upload/v1683680006/RentMeUser/vzn0zktc34vhhklfkj6z.png"
+    "followers" : ["645aeb1536bc2fca2aa96e0e"]
 }
 
 
@@ -59,14 +60,8 @@ GET http://localhost:8000/api/category
 POST http://localhost:8000/api/category
 Content-Type: application/json
 
-<<<<<<< HEAD
-{
-    "parentId" : "643e60f763813abf8b96a5ed",
-    "categoryName" : "Эрэгтэй"
-=======
 {    
     "categoryName" : "Бусад"
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
 }
 
 ###
@@ -95,24 +90,14 @@ Content-Type: application/json
 GET http://localhost:8000/api/itemsDate
 
 ###
-POST http://localhost:8000/api/items
-Content-Type: application/json
-
-{
-    "pageSize" : 1,
-"searchText" : "short"
-}
+GET http://localhost:8000/api/item
 
 ###
 POST http://localhost:8000/api/item
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
-  "itemName" : "ball",
-=======
   "itemName" : "Gun",
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
   "itemPhoto" : "hi",
   "categoryId" : "6434f24ea29bc8df661b4240",
   "phoneNumber" : 89018416,
@@ -187,3 +172,35 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/api/employee/
+
+###
+POST http://localhost:8000/api/comments
+Content-Type: application/json
+
+{
+    "itemId" : "123"
+}
+
+###
+GET http://localhost:8000/api/comment
+
+###
+POST http://localhost:8000/api/comment
+Content-Type: application/json
+
+{
+    "itemId" :"123",
+    "userId" : "sd",
+    "comment" : "sjbd"
+}
+
+###
+PUT http://localhost:8000/api/comment/6462f56b063e3f9747054c3c
+Content-Type: application/json
+
+{
+    "comment" : "dsfsdfsdfwefwefw"
+}
+
+###
+DELETE http://localhost:8000/api/comment/6462f59b063e3f9747054c40
