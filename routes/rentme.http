@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8000/api/user
+GET http://localhost:8000/api/users
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0MzRmOTU1MGVhMWQyMjE5YjBjYTg0ZCIsImZpcnN0TmFtZSI6IkJhdEVyZGVuZSIsImxhc3ROYW1lIjoiR2Fuem9yaWciLCJVc2VybmFtZSI6IkdhbnpvIiwiZW1haWwiOiJiYXRlcmRlbmVnYW56b3JpZzk5QGdtYWlsLmNvbSIsImJpcnRoRGF0ZSI6IjIwMDQtMDctMjFUMDA6MDA6MDAuMDAwWiIsInBob25lTnVtYmVyIjo4OTAxODQxNywicm9sZSI6IkFkbWluIiwiYWRkcmVzcyI6IlVCIiwicGFzc3dvcmQiOiIkMmIkMTAkZFZYL1hESkNsQ2VtRnZqbkM0S3ZjT1VjVjhVTWk5RkwuVHhVNS5USEt1YU9JQWtnR2ZwUzIiLCJnZW5kZXIiOiJNYWxlIiwiZmF2SXRlbXMiOlsiaGkiXSwiX192IjowfSwiaWF0IjoxNjgxNzk1NzU0LCJleHAiOjE2ODE4ODIxNTR9.ndN5GZafLNGxUCdtSVn1TxY9bQYsuE6Vz4vU0VG85m4
 ###
 POST http://localhost:8000/api/users
@@ -14,11 +14,11 @@ GET http://localhost:8000/api/user/6434f205c6a236e8814af1ed
 
 
 ###
-PUT http://localhost:8000/api/user/6453225c09a7a9a8299547cc
+PUT http://localhost:8000/api/user/64529ab1e4c101a725ebb373
 Content-Type: application/json
 
 {
-    "profilePic" : "https://res.cloudinary.com/devfpr9pm/image/upload/v1683680006/RentMeUser/vzn0zktc34vhhklfkj6z.png"
+    "following" : ["sdfdsf", "sdFVdsfsd" , "sdfsdfds"]
 }
 
 

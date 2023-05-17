@@ -72,6 +72,9 @@ const userSchema = new mongoose_1.Schema({
         required: true,
     },
     favItems: [String],
+    followers: [String],
+    following: [String],
+    pendingFollowers: [String]
 });
 const User = mongoose_1.default.model("users", userSchema);
 exports.default = User;

@@ -3,14 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const item_controller_1 = require("../controllers/item.controller");
 const route = (0, express_1.Router)();
-<<<<<<< HEAD
-route.post("/items", item_controller_1.getAll)
-=======
 route
     .post("/items", item_controller_1.getAllWithSearch)
     .post("/itemUser", item_controller_1.getAllWithUser)
     .get("/item", item_controller_1.getAll)
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
     .get("/item/:_id", item_controller_1.getOne)
     .post("/item", item_controller_1.createItem)
     .put("/item/:_id", item_controller_1.updateItem)

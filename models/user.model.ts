@@ -12,6 +12,9 @@ interface IUser {
   password: string;
   gender: string;
   favItems: string;
+  followers : string[];
+  following : string[];
+  pendingFollowers : string[]
 }
 const userSchema = new Schema<IUser>({
   firstName: {
@@ -61,6 +64,9 @@ const userSchema = new Schema<IUser>({
     required: true,
   },
   favItems: [String],
+  followers : [String],
+  following : [String],
+  pendingFollowers : [String]
 });
 
 const User = mongoose.model("users", userSchema);
