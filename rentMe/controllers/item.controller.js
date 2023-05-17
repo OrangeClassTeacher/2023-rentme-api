@@ -102,31 +102,10 @@ const getAllWithDate = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 exports.getAllWithDate = getAllWithDate;
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-<<<<<<< HEAD
-    const { pageSize, searchText, sort } = req.body;
-=======
     console.log("Test");
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
     try {
-        const filter1 = {
-            $or: searchText && [
-                { itemName: { $regex: searchText } },
-                { description: { $regex: searchText } },
-            ],
-        };
-        // console.log(filter);
-        const skips = 10 * (pageSize - 1);
-        const result = yield item_model_1.default.find(filter1)
-            .limit(28)
-            .skip(skips);
-        // .select({itemPhoto : 1 , itemName : 1 , phoneNumber : 1 , rentalPrice : 1 , rentalDate : 1, discription : 1});
-        console.log(result);
-        if (result) {
-            res.json({ status: true, result });
-        }
-        else {
-            res.json({ status: false, message: "Not Found" });
-        }
+        const result = yield item_model_1.default.find({});
+        res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });

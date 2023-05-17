@@ -54,24 +54,8 @@ const itemSchema = new mongoose_1.Schema({
         type: Number,
         required: true,
     },
-    rentalStartDate: {
-        type: Date,
-        required: true,
-    },
-    rentalEndDate: {
-        type: Date,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-<<<<<<< HEAD
 }, {
     timestamps: true
 });
-=======
-}, { timestamps: true });
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
 const Item = mongoose_1.default.model("Items", itemSchema);
 exports.default = Item;
