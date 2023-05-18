@@ -30,5 +30,7 @@ const rentDataSchema = new mongoose_1.Schema({
     itemId: { type: String, required: true },
     rentalStartDay: { type: Date, required: true },
     rentalEndDay: { type: Date, required: true },
+    totalPrice: { type: Number, required: true },
+    status: { type: String, enum: ["Rent", "Pending"] },
 });
 const rentData = mongoose_1.default.model("RentData", rentDataSchema);
