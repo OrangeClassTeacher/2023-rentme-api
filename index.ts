@@ -16,14 +16,15 @@ app.use(cors());
 app.use(express.json());
 
 const port: string = process.env.PORT || "";
-const MONGO_DB_URL: string = process.env.MONGO_DB_URL || "";
-// console.log(MONGO_DB_URL);
+const MONGO_DB_URI: string = process.env.MONGO_DB_URL || "";
 
 mongoose
-  .connect(MONGO_DB_URL)
+  .connect(MONGO_DB_URI)
   .then(() => console.log(`Database connected`))
   .catch((err) => console.log(err));
-
+app.get("/api", (req, res) => {
+  res.json("Hello my Friend");
+});
 app.use("/api", userRoute);
 app.use("/api", categoryRoute);
 app.use("/api", itemRoute);
