@@ -54,8 +54,24 @@ const itemSchema = new mongoose_1.Schema({
         type: Number,
         required: true,
     },
+<<<<<<< HEAD:rentMe/models/item.model.js
 }, {
     timestamps: true
 });
+=======
+    rentalStartDate: {
+        type: Date,
+        required: true,
+    },
+    rentalEndDate: {
+        type: Date,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+}, { timestamps: true });
+>>>>>>> fa6419f764b8123cd8228b317c29348e8ee1732f:dist/models/item.model.js
 const Item = mongoose_1.default.model("Items", itemSchema);
 exports.default = Item;

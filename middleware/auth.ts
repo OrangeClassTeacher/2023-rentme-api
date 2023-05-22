@@ -23,7 +23,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const decoded = jwt.verify(token, key1);
     console.log(decoded);
-    req.user = decoded;
+    // req.user = decoded;
   } catch (err) {
     console.log(err);
 

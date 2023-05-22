@@ -12,9 +12,14 @@ interface IUser {
   password: string;
   gender: string;
   favItems: string;
+<<<<<<< HEAD
   followers : string[];
   following : string[];
   pendingFollowers : string[]
+=======
+  followers: string[];
+  following: string[];
+>>>>>>> fa6419f764b8123cd8228b317c29348e8ee1732f
 }
 const userSchema = new Schema<IUser>({
   firstName: {
@@ -63,6 +68,8 @@ const userSchema = new Schema<IUser>({
     enum: ["Male", "Female"],
     required: true,
   },
+  followers: [String],
+  following: [String],
   favItems: [String],
   followers : [String],
   following : [String],
