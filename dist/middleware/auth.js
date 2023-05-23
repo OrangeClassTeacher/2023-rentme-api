@@ -6,10 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
-<<<<<<< HEAD
-=======
 //hui
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
 dotenv_1.default.config();
 const key1 = process.env.TOKEN_SECRET_KEY || "";
 const auth = (req, res, next) => {
@@ -25,7 +22,7 @@ const auth = (req, res, next) => {
     try {
         const decoded = jsonwebtoken_1.default.verify(token, key1);
         console.log(decoded);
-        req.user = decoded;
+        // req.user = decoded;
     }
     catch (err) {
         console.log(err);

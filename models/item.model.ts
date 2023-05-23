@@ -67,4 +67,3 @@ const itemSchema = new Schema<IItem>(
 );
 const Item = mongoose.model("Items", itemSchema);
 export default Item;
-
