@@ -12,6 +12,7 @@ interface IItem {
   rentalStartDate: Date;
   rentalEndDate: Date;
   description: string;
+  status : string
 }
 const itemSchema = new Schema<IItem>(
   {
@@ -44,13 +45,6 @@ const itemSchema = new Schema<IItem>(
       type: Number,
       required: true,
     },
-<<<<<<< HEAD
-}, {
-    timestamps : true
-})
-const Item = mongoose.model("Items" , itemSchema)
-export default Item
-=======
     rentalStartDate: {
       type: Date,
       required: true,
@@ -63,9 +57,14 @@ export default Item
       type: String,
       required: true,
     },
+    status : {
+      type : String,
+      required : true,
+      enum : ["Pending" , "Rented"]
+    }
   },
   { timestamps: true }
 );
 const Item = mongoose.model("Items", itemSchema);
 export default Item;
->>>>>>> 8862a99b1887c839e079d3adf6a7ab4cd1d9f9a1
+
