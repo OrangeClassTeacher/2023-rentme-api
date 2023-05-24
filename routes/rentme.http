@@ -110,7 +110,12 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8000/api/item/
+PUT http://localhost:9000/api/item/645aff30242bcfa3fdb7310a
+Content-Type: application/json
+
+{
+    "requests" :[{"userId" : "skdjn" , "status" : "Rented"},{"userId" : "skdjn" , "status" : "Rented"}]
+}
 
 ###
 DELETE http://localhost:8000/api/item/

@@ -132,10 +132,13 @@ const createItem = async (req: Request, res: Response) => {
 };
 const updateItem = async (req: Request, res: Response) => {
   const { _id } = req.params;
+  console.log(_id);
+
   if (!_id) {
     res.json({ status: false, message: "Id " });
   }
   try {
+    console.log(req.body);
     const result = await Item.findByIdAndUpdate({ _id }, req.body);
     res.json({ status: true, result });
   } catch (err) {

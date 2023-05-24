@@ -12,7 +12,7 @@ interface IItem {
   rentalStartDate: Date;
   rentalEndDate: Date;
   description: string;
-  requests: object[];
+  requests: [object];
 }
 const itemSchema = new Schema<IItem>(
   {
