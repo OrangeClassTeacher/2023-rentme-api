@@ -12,7 +12,7 @@ interface IItem {
   rentalStartDate: Date;
   rentalEndDate: Date;
   description: string;
-  status : string
+  requests: object[];
 }
 const itemSchema = new Schema<IItem>(
   {
@@ -57,11 +57,16 @@ const itemSchema = new Schema<IItem>(
       type: String,
       required: true,
     },
-    status : {
-      type : String,
-      required : true,
-      enum : ["Pending" , "Rented"]
-    }
+    requests: [
+      {
+        userId: { type: String, required: true },
+        status: {
+          type: String,
+          enum: ["Pending", "Rented", "unRented"],
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

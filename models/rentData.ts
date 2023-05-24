@@ -21,3 +21,4 @@ const rentDataSchema = new Schema<IRentData>({
 });
 
 const rentData = mongoose.model("RentData", rentDataSchema);
+export default rentData;
