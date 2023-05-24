@@ -110,11 +110,11 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:9000/api/item/645aff30242bcfa3fdb7310a
+PUT http://localhost:9000/api/item/645aff48242bcfa3fdb7310c
 Content-Type: application/json
 
 {
-    "requests" :[{"userId" : "skdjn" , "status" : "Rented"},{"userId" : "skdjn" , "status" : "Rented"}]
+    "requests" :[{"userId" : "645270b46ea80790e33c64c2" , "status" : "Pending"},{"userId" : "64529ab1e4c101a725ebb373" , "status" : "Pending"}]
 }
 
 ###
